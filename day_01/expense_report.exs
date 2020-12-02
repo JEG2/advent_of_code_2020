@@ -14,7 +14,6 @@ defmodule ExpenseReport do
     |> read_expenses
     |> add_two_to(2020)
     |> multiply
-    |> IO.inspect()
   end
 
   def find_three(path) do
@@ -22,7 +21,6 @@ defmodule ExpenseReport do
     |> read_expenses
     |> add_three_to(2020)
     |> multiply
-    |> IO.inspect()
   end
 
   defp read_expenses(path) do
@@ -54,4 +52,6 @@ defmodule ExpenseReport do
   defp multiply(expenses), do: Enum.reduce(expenses, 1, fn i, j -> i * j end)
 end
 
-ExpenseReport.run(System.argv())
+System.argv()
+|> ExpenseReport.run()
+|> IO.puts()
