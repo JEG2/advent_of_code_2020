@@ -61,4 +61,4 @@ end
 
 System.argv()
 |> TobogganRide.run()
-|> IO.inspect()
+|> IO.puts()
