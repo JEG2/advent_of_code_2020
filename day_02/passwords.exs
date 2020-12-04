@@ -24,7 +24,7 @@ defmodule Passwords do
   defp read_passwords(path) do
     path
     |> File.stream!()
-    |> Enum.map(fn line ->
+    |> Stream.map(fn line ->
       parsed =
         Regex.named_captures(
           ~r{\A(?<min>\d+)-(?<max>\d+)\s+(?<required>\S):\s*(?<password>\S+)\z},
