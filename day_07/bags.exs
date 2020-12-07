@@ -73,4 +73,4 @@ end
 
 System.argv()
 |> Bags.run()
-|> IO.inspect()
+|> IO.puts()
