@@ -33,30 +33,26 @@ defmodule Adapters do
     [0 | adapters]
   end
 
-  defp count(adapters, branches \\ 1)
-
-  defp count([_last], branches), do: branches
-
-  defp count([adapter | rest], branches) do
-    IO.inspect({adapter, rest, branches})
-    choices = run_of_choices(adapter, rest)
-    skip = length(choices) - 1
-    multiple = 2 |> :math.pow(skip) |> trunc
-    IO.inspect(choices)
-    count(Enum.drop(rest, skip), branches * multiple)
+  defp count([first | adapters]) do
+    adapters
+    |> Enum.reduce([[first]], fn n, [[prev | _rest] = group | rest] ->
+      if n == prev + 1 do
+        [[n | group] | rest]
+      else
+        [[n], group | rest]
+      end
+    end)
+    |> Enum.map(&length/1)
+    |> Enum.map(&to_combinations/1)
+    |> Enum.reduce(&Kernel.*/2)
   end
 
-  defp run_of_choices(adapter, rest, choices \\ [])
+  def to_combinations(0), do: 0
+  def to_combinations(1), do: 1
+  def to_combinations(2), do: 1
 
-  defp run_of_choices(adapter, [skip, test | rest], choices)
-       when test - adapter <= 3 do
-    IO.inspect({adapter, test, rest, choices}, label: :choices)
-    run_of_choices(skip, [test | rest], [skip | choices])
-  end
-
-  defp run_of_choices(_adapter, [next | rest], choices) do
-    Enum.reverse([next | choices])
-  end
+  def to_combinations(n),
+    do: to_combinations(n - 1) + to_combinations(n - 2) + to_combinations(n - 3)
 
   defp measure_differences(adapters) do
     adapters
