@@ -98,7 +98,8 @@ defmodule Seating do
           sum
         end
       end)
-      |> IO.inspect(label: "{#{x}, #{y}}")
+
+      # |> IO.inspect(label: "{#{x}, #{y}}")
     end
 
     defp next_seat(sim, x, y, x_offset, y_offset) do
@@ -186,6 +187,8 @@ defmodule Seating do
   end
 
   defp stabilize_with_sight(sim) do
+    # sim |> Simulation.to_string() |> IO.puts()
+    # IO.puts("")
     new_sim = Simulation.advance_with_line_of_sight(sim)
 
     if sim == new_sim do
@@ -212,4 +215,4 @@ end
 
 System.argv()
 |> Seating.run()
-|> IO.inspect()
+|> IO.puts()
