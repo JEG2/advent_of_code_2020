@@ -192,4 +192,4 @@ end
 
 System.argv()
 |> Tickets.run()
-|> IO.inspect()
+|> IO.puts()
