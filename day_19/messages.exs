@@ -112,4 +112,4 @@ end
 
 System.argv()
 |> Messages.run()
-|> IO.inspect()
+|> IO.puts()
