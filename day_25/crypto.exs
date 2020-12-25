@@ -1,12 +1,6 @@
 defmodule Crypto do
-  def run(args) do
-    {opts, [path]} = OptionParser.parse!(args, strict: [part_2: :boolean])
-
-    # if Keyword.get(opts, :part_2) do
-    #   advance_living_art(path)
-    # else
+  def run([path]) do
     find_encryption_key(path)
-    # end
   end
 
   defp find_encryption_key(path) do
@@ -46,4 +40,4 @@ end
 
 System.argv()
 |> Crypto.run()
-|> IO.inspect()
+|> IO.puts()
